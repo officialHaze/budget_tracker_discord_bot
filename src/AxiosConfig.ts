@@ -8,7 +8,7 @@ const getSecretKey = async () => {
     const secretBuff = await fs.readFile(
       path.join(__dirname, "../secretkey.pem")
     );
-    return secretBuff.toString();
+    return secretBuff.toString().replace(/\n/g, "");
   } catch (error) {
     console.error(error);
   }
