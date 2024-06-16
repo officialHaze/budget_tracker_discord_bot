@@ -1,0 +1,19 @@
+{
+  "name": "fms-discord-bot",
+  "version": "0.0.1",
+  "description": "Bot interface to interact with the fms API",
+  "main": "Main.js",
+  "scripts": {
+    "dev": "clear && nodemon src/Main.ts"
+  },
+  "author": "Moinak Dey",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5"
+  }
+}

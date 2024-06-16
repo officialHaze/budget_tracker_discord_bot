@@ -1,0 +1,8 @@
+# External modules
+node_modules/
+
+# Build folder
+dist/
+
+# ENV
+.env
