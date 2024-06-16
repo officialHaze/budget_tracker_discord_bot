@@ -1,8 +1,9 @@
-import axiosInstance from "../../../AxiosConfig";
+import AxiosInstance from "../../../AxiosConfig";
 
 export default class AddIncome {
   public static async handle(year: number, month: number, amount: number) {
     try {
+      const axiosInstance = await AxiosInstance.getInstance();
       const { data } = await axiosInstance.post("/api/income/add", {
         year,
         month,

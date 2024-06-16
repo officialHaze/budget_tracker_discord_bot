@@ -1,4 +1,4 @@
-import axiosInstance from "../../AxiosConfig";
+import AxiosInstance from "../../AxiosConfig";
 import ArgParser from "../ArgParser";
 
 export default class Expense {
@@ -31,6 +31,8 @@ export default class Expense {
     try {
       const { year, month, expenseAmt, paidTo } = this.parseArgs(args);
       console.log({ year, month, expenseAmt, paidTo });
+
+      const axiosInstance = await AxiosInstance.getInstance();
 
       const { data } = await axiosInstance.post("/api/new_expense", {
         year,
