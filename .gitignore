@@ -6,6 +6,7 @@ dist/
 
 # ENV
 .env
+env.json
 
 # Secrets
 secretkey.pem

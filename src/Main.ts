@@ -1,5 +1,4 @@
 import BotAccess from "./BotAccess";
-import "dotenv/config";
 import HandleGuldMessages from "./handlers/HandleGuildMessages";
 
 class Main {

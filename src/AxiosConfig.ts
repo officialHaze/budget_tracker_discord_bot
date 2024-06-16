@@ -1,6 +1,7 @@
 import axios from "axios";
 import fs from "fs/promises";
 import path from "path";
+import env from "../env.json";
 
 const getSecretKey = async () => {
   try {
@@ -19,7 +20,7 @@ export default class AxiosInstance {
       const secretKey = await getSecretKey();
 
       return axios.create({
-        baseURL: process.env.FMS_SERVER_BASEURL,
+        baseURL: env.FMS_SERVER_BASEURL,
         headers: {
           secret: secretKey,
         },
