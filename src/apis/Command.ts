@@ -1,6 +1,7 @@
 import { Message } from "discord.js";
 import axiosInstance from "../AxiosConfig";
 import Income from "./commands/Income";
+import Expense from "./commands/Expense";
 
 export class Command {
   private static prefix = "!";
@@ -39,8 +40,12 @@ export class Command {
     try {
       switch (command.toLowerCase()) {
         case "income":
-          const message = await Income.handle(subcommand, args);
-          return message;
+          const messageIncome = await Income.handle(subcommand, args);
+          return messageIncome;
+
+        case "expense":
+          const messageExpense = await Expense.handle(args);
+          return messageExpense;
 
         default:
           throw new Error(
