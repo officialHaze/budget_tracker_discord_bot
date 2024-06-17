@@ -1,11 +1,18 @@
+interface Options {
+  notRequired?: boolean;
+}
+
 export default class ArgParser {
-  public static parseMonth(args: string[]) {
+  public static parseMonth(args: string[], options?: Options) {
     // Month
     let monthIdx = -1;
     args.forEach((item, idx) => {
       if (item.startsWith("-m")) return (monthIdx = idx);
     });
-    if (monthIdx < 0) throw new Error("-m arg required!");
+    if (monthIdx < 0 && !options?.notRequired)
+      throw new Error("-m arg required!");
+    else if (monthIdx < 0 && options?.notRequired) return -1;
+
     const monthStr = args[monthIdx].split("=")[1];
     const month = parseInt(monthStr);
 

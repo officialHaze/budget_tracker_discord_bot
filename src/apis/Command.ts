@@ -3,6 +3,7 @@ import axiosInstance from "../AxiosConfig";
 import Income from "./commands/Income";
 import Expense from "./commands/Expense";
 import Savings from "./commands/Savings";
+import Report from "./commands/Report";
 
 export class Command {
   private static prefix = "!";
@@ -51,6 +52,14 @@ export class Command {
         case "savings":
           const messageSavings = await Savings.handle(subcommand, args);
           return messageSavings;
+
+        case "report":
+          const reportRes = await Report.handle(subcommand, args);
+          return {
+            content:
+              "Total expense: " + reportRes.totalExpense.toString() + "/-",
+            attachmentLink: reportRes.downloadLink,
+          };
 
         default:
           throw new Error(

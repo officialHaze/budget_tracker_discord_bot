@@ -11,15 +11,33 @@ export default class HandleGuldMessages {
       const command = Command.parse(message);
       if (!command) return;
 
-      const successMessage = await Command.handle(
+      const successMessage:
+        | string
+        | { content: string; attachmentLink: string } = await Command.handle(
         command.command,
         command.subcommand,
         command.args
       );
-      message.reply(successMessage);
+      if (typeof successMessage === "string")
+        return message.reply(successMessage);
+
+      // Send attachment
+      const splits = successMessage.attachmentLink.split("/");
+      const attachmentName = splits[splits.length - 1];
+      message.channel.send({
+        files: [
+          {
+            attachment: successMessage.attachmentLink,
+            name: attachmentName,
+          },
+        ],
+        content: successMessage.content,
+      });
     } catch (err: any) {
       console.error(err);
-      message.reply(err.message ?? "Some error occurred in backend!");
+      message.reply(
+        err.response.data.message ?? "Some error occurred in backend!"
+      );
     }
   }
 }
