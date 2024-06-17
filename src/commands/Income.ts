@@ -1,5 +1,5 @@
 import ArgParser from "../apis/ArgParser";
-import AddIncome from "./subcommands/AddIncome";
+import AddIncome from "./subcommands/incomeRelated/AddIncome";
 
 export default class Income {
   private static supportedSubCommands = ["add"];

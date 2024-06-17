@@ -1,4 +1,4 @@
-import AxiosInstance from "../../AxiosConfig";
+import AxiosInstance from "../../../AxiosConfig";
 
 export default class SavingsWithdraw {
   public static async handle(amount: number): Promise<string> {
