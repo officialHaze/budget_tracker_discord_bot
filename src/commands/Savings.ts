@@ -1,6 +1,6 @@
 import ArgParser from "../apis/ArgParser";
-import SavingsDeposit from "./subcommands/SavingsDeposit";
-import SavingsWithdraw from "./subcommands/SavingsWithdraw";
+import SavingsDeposit from "./subcommands/savingsRelated/SavingsDeposit";
+import SavingsWithdraw from "./subcommands/savingsRelated/SavingsWithdraw";
 
 export default class Savings {
   private static supportedSubcommands = ["deposit", "withdraw"];

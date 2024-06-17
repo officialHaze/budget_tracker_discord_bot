@@ -1,7 +1,8 @@
-import ExpenseReport from "./subcommands/ExpenseReport";
+import ExpenseReport from "./subcommands/reportRelated/ExpenseReport";
+import IncomeReport from "./subcommands/reportRelated/IncomeReport";
 
 export default class Report {
-  private static supportedSubcommands = ["expense"];
+  private static supportedSubcommands = ["expense", "income"];
 
   public static async handle(subcommand: string, args: string[]) {
     try {
@@ -14,7 +15,20 @@ export default class Report {
       switch (subcommand.toLowerCase()) {
         case "expense":
           const expenseRes = await ExpenseReport.handle(args);
-          return expenseRes;
+          return {
+            total: "Total expense: " + expenseRes.totalExpense + "/-",
+            downloadLink: expenseRes.downloadLink,
+          };
+
+        case "income":
+          const incomeReportRes = await IncomeReport.handle(args);
+          return {
+            total:
+              "Total outstanding income: " +
+              incomeReportRes.totalOutstanding +
+              "/-",
+            downloadLink: incomeReportRes.downloadLink,
+          };
 
         default:
           throw new Error(

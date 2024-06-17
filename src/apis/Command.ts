@@ -53,10 +53,10 @@ export class Command {
           return messageSavings;
 
         case "report":
-          const reportRes = await Report.handle(subcommand, args);
+          const reportRes: { total: string; downloadLink: string } =
+            await Report.handle(subcommand, args);
           return {
-            content:
-              "Total expense: " + reportRes.totalExpense.toString() + "/-",
+            content: reportRes.total,
             attachmentLink: reportRes.downloadLink,
           };
 
