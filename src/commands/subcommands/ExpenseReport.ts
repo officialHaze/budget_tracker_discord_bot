@@ -1,5 +1,5 @@
-import AxiosInstance from "../../../AxiosConfig";
-import ArgParser from "../../ArgParser";
+import AxiosInstance from "../../AxiosConfig";
+import ArgParser from "../../apis/ArgParser";
 
 export default class ExpenseReport {
   private static parseArgs(args: string[]): {

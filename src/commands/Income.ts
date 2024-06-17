@@ -1,4 +1,4 @@
-import ArgParser from "../ArgParser";
+import ArgParser from "../apis/ArgParser";
 import AddIncome from "./subcommands/AddIncome";
 
 export default class Income {
@@ -6,15 +6,13 @@ export default class Income {
 
   private static parseArgs(args: string[]): {
     amount: number;
-    month: number;
-    year: number;
   } {
     try {
       const year = ArgParser.parseYear(args);
       const month = ArgParser.parseMonth(args);
       const amt = ArgParser.parseAmount(args);
 
-      return { amount: amt, month, year };
+      return { amount: amt };
     } catch (err) {
       throw err;
     }
@@ -24,12 +22,12 @@ export default class Income {
     try {
       if (!subcommand) throw new Error("Subcommand required!");
 
-      const { amount, month, year } = this.parseArgs(args);
-      console.log({ year, month, amount });
+      const { amount } = this.parseArgs(args);
+      console.log({ amount });
 
       switch (subcommand.toLowerCase()) {
         case "add":
-          await AddIncome.handle(year, month, amount);
+          await AddIncome.handle(amount);
           return "Income added successfully!";
 
         default:

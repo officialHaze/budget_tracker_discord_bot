@@ -1,16 +1,12 @@
-import AxiosInstance from "../../AxiosConfig";
-import ArgParser from "../ArgParser";
+import AxiosInstance from "../AxiosConfig";
+import ArgParser from "../apis/ArgParser";
 
 export default class Expense {
   private static parseArgs(args: string[]): {
-    year: number;
-    month: number;
     expenseAmt: number;
     paidTo?: string;
   } {
     try {
-      const year = ArgParser.parseYear(args);
-      const month = ArgParser.parseMonth(args);
       const amt = ArgParser.parseAmount(args);
 
       // Paid to
@@ -21,7 +17,7 @@ export default class Expense {
       });
       if (paidToIdx > 0) paidTo = args[paidToIdx].split("=")[1];
 
-      return { year, month, expenseAmt: amt, paidTo };
+      return { expenseAmt: amt, paidTo };
     } catch (err) {
       throw err;
     }
@@ -29,14 +25,12 @@ export default class Expense {
 
   public static async handle(args: string[]) {
     try {
-      const { year, month, expenseAmt, paidTo } = this.parseArgs(args);
-      console.log({ year, month, expenseAmt, paidTo });
+      const { expenseAmt, paidTo } = this.parseArgs(args);
+      console.log({ expenseAmt, paidTo });
 
       const axiosInstance = await AxiosInstance.getInstance();
 
       const { data } = await axiosInstance.post("/api/new_expense", {
-        year,
-        month,
         expense_amount: expenseAmt,
         paid_to: paidTo,
       });

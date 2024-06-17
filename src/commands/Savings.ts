@@ -1,20 +1,17 @@
-import ArgParser from "../ArgParser";
+import ArgParser from "../apis/ArgParser";
 import SavingsDeposit from "./subcommands/SavingsDeposit";
+import SavingsWithdraw from "./subcommands/SavingsWithdraw";
 
 export default class Savings {
   private static supportedSubcommands = ["deposit", "withdraw"];
 
   private static parseArgs(args: string[]): {
-    year: number;
-    month: number;
     amount: number;
   } {
     try {
-      const year = ArgParser.parseYear(args);
-      const month = ArgParser.parseMonth(args);
       const amount = ArgParser.parseAmount(args);
 
-      return { year, month, amount };
+      return { amount };
     } catch (error) {
       throw error;
     }
@@ -28,16 +25,16 @@ export default class Savings {
             this.supportedSubcommands.toString()
         );
 
-      const { year, month, amount } = this.parseArgs(args);
+      const { amount } = this.parseArgs(args);
 
       switch (subcommand.toLowerCase()) {
         case "deposit":
-          const message = await SavingsDeposit.handle(year, month, amount);
+          const message = await SavingsDeposit.handle(amount);
           return message;
 
         case "withdraw":
-          console.log("Withdraw API is not yet ready!");
-          return "Withdraw API is not yet ready!";
+          const withdrawRes: string = await SavingsWithdraw.handle(amount);
+          return withdrawRes;
 
         default:
           throw new Error(

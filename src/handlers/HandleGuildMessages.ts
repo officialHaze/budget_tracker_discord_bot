@@ -36,7 +36,9 @@ export default class HandleGuldMessages {
     } catch (err: any) {
       console.error(err);
       message.reply(
-        err.response.data.message ?? "Some error occurred in backend!"
+        err.response?.data?.message ??
+          err.message ??
+          "Some error occurred in backend!"
       );
     }
   }
