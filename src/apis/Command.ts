@@ -1,9 +1,8 @@
 import { Message } from "discord.js";
-import axiosInstance from "../AxiosConfig";
-import Income from "./commands/Income";
-import Expense from "./commands/Expense";
-import Savings from "./commands/Savings";
-import Report from "./commands/Report";
+import Income from "../commands/Income";
+import Expense from "../commands/Expense";
+import Savings from "../commands/Savings";
+import Report from "../commands/Report";
 
 export class Command {
   private static prefix = "!";
